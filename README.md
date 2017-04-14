@@ -24,11 +24,11 @@
 
 ## 查看spmd
 
-在钻展页面点击浏览器右上角图标![][1]启动查看功能, 此时图标为![][3]. 此时鼠标移动到页面有spmd段的元素上回自动弹出元素spmd值, 点击弹窗自动复制到剪切板
+在钻展页面点击浏览器右上角图标![][1]启动查看功能, 此时图标为![][3]. 此时鼠标移动到页面有spmd段、spmb段、个性化配置复制值, 点击值自动复制到剪切板
 
 如图:![][4]
 
-[4]: https://gw.alicdn.com/tps/TB1cTvIOVXXXXcqXFXXXXXXXXXX-665-328.png
+[4]: https://img.alicdn.com/tfs/TB1MlKIQFXXXXcKXXXXXXXXXXXX-1398-704.png
 [3]: https://gw.alicdn.com/tps/TB1e0nnOVXXXXb8apXXXXXXXXXX-38-38.png
 [2]: https://github.com/thx/FE-tools/releases
 [1]: https://gw.alicdn.com/tps/TB1Vfz1OVXXXXc_XXXXXXXXXXXX-38-38.png
