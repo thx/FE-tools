@@ -29,8 +29,8 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 						</div>
 						<div style="margin-bottom:15px;">
 							spmb段为：<span class="data-spm-b" data-clipboard-target=".data-spm-b"><%= spmb%></span>
-							<span style="margin-left:10px;">pv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmdObj.pv%></span></span>
-							<span style="margin-left:10px;">uv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmdObj.uv%></span></span>
+							<span style="margin-left:10px;">pv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmbObj.pv%></span></span>
+							<span style="margin-left:10px;">uv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmbObj.uv%></span></span>
 						</div>
 						<div>
 							个性化配置复制：<span class="data-spm-copy" data-clipboard-target=".data-spm-copy"><%= spmd%>-<%= spmb%></span>
