@@ -13,7 +13,8 @@
 	},
 	"content_scripts": [{
 		"matches": ["https://*.taobao.com/*"],
-		"js": ["jquery-2.0.0.min.js", "underscore.min.js", "clipboard.min.js", "content.js"]
+		"js": ["jquery-2.0.0.min.js", "underscore.min.js", "clipboard.min.js", "content.js"],
+		"css": ["content.css"]
 	}],
 	"permissions": [
 		"activeTab",

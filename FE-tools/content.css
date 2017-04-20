@@ -1,0 +1,106 @@
+.chrome-plug-spm-btn{
+    display: inline-block;
+    height: 25px;
+    margin-bottom: 0;
+    padding: 0 9px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: 0;
+    background-color: #4d7fff;
+    background-image: none;
+    -webkit-transition: color .15s ease-out,background-color .15s ease-out;
+    -moz-transition: color .15s ease-out,background-color .15s ease-out;
+    -ms-transition: color .15s ease-out,background-color .15s ease-out;
+    -o-transition: color .15s ease-out,background-color .15s ease-out;
+    transition: color .15s ease-out,background-color .15s ease-out;
+}
+.chrome-plug-spm-input{
+    display: inline-block;
+    height: 26px;
+    font-size: 12px;
+    line-height: 1.224489797;
+    padding: 0 7px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    background-image: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color .15s ease-out;
+    -moz-transition: border-color .15s ease-out;
+    -ms-transition: border-color .15s ease-out;
+    -o-transition: border-color .15s ease-out;
+    transition: border-color .15s ease-out;
+    border-color: #e6e6e6;
+    color: #333;
+}
+.chrome-plug-spm-input:focus{
+    outline: 0;
+    border-color: #4d7fff;
+    box-shadow: none;
+}
+.chrome-plug-spm-car{
+    position: fixed;
+    top: 100px;
+    right: -300px;
+    z-index: 9999999;
+    -webkit-transition: right .3s ease-out;
+    -moz-transition: right .3s ease-out;
+    -ms-transition: right .3s ease-out;
+    -o-transition: right .3s ease-out;
+    transition: right .3s ease-out;
+}
+.chrome-plug-spm-inlineblock{
+    display: inline-block;
+}
+.chrome-plug-spm-car-content{
+    max-height: 500px;
+    min-height: 200px;
+    overflow: auto;
+    background-color: #fff;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+}
+.chrome-plug-clear{
+    float: right;
+}
+.chrome-plug-save-error{
+    color: red;
+}
+.mt10{
+    margin-top: 10px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.ml10{
+    margin-left: 10px;
+}
+.mt30{
+    margin-top: 30px;
+}
+.fl{
+    float: left;
+}
