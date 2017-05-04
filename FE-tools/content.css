@@ -64,7 +64,7 @@
     position: fixed;
     top: 100px;
     right: -300px;
-    z-index: 9999999;
+    z-index: 9999999999;
     -webkit-transition: right .3s ease-out;
     -moz-transition: right .3s ease-out;
     -ms-transition: right .3s ease-out;
@@ -83,11 +83,19 @@
     padding: 20px;
     border: 1px solid #eaeaea;
 }
+.chrome-plug-spm-input-box{
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
+}
 .chrome-plug-clear{
     float: right;
 }
 .chrome-plug-save-error{
     color: red;
+}
+.mr5{
+    margin-right: 5px;
 }
 .mt10{
     margin-top: 10px;

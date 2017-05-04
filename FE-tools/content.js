@@ -36,6 +36,20 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 						    spmb列表
 						</h4>
 					</div>
+					<div class="chrome-plug-spm-car-dialog mt30">
+						<h4>
+						    弹窗列表
+						</h4>
+						<div class="chrome-plug-spm-input-box mt10">
+							<form>
+								<% _.each(dialogList, function (dialog) {%>
+									<div>
+										<input type="checkbox" class="chrome-plug-spm-input-dialog mr5" value="<%= dialog%>" chrome-plug-spm-last="<%= dialog%>:<%= dialog%>"/><%= dialog%>
+									</div>
+								<%})%>
+							</form>
+						</div>
+					</div>
 					<button class="chrome-plug-spm-btn chrome-plug-spm-btn-save mt30">保存</button>
 					<div class="chrome-plug-save-error mt10"></div>
 				</div>
@@ -43,7 +57,46 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 		*/
 	}.toString().replace(/[\r\n]/g, "").replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
 	var carTplFn = _.template(carTpl)
-	$('body').append(carTplFn())
+	$('body').append(carTplFn({
+		dialogList: ['新手引导',
+					 '首页引导',
+					 '计划草稿',
+					 '全店新建编辑资源位',
+					 '单品新建编辑资源位',
+					 '类目型定向',
+					 '相似宝贝定向',
+					 '智能定向',
+					 '营销场景定向',
+					 '达摩盘定向',
+					 '兴趣点定向',
+					 '访客定向',
+					 '群体定向',
+					 '卖家属性定向',
+					 '单品智能定向-购物意图定向',
+					 '单品达摩盘定向',
+					 '单品扩展定向',
+					 '单品创意编辑',
+					 '添加创意-创意库选择',
+					 '添加创意-本地上传',
+					 '添加创意-创意模板制作',
+					 '添加创意-快捷制作',
+					 '计划设置-整体',
+					 '计划复制',
+					 '单元复制',
+					 '选择定向类型',
+					 '选择计划单元',
+					 '全店-添加编辑定向-出价设置',
+					 '全店-添加编辑资源位-出价设置',
+					 '单品计划设置-整体',
+					 '单品选择计划单元',
+					 '单品选择定向类型',
+					 '单品-智能定向-相似宝贝定向-横向管理',
+					 '单品-智能定向-访客定向-横向管理',
+					 '单品-增加资源位',
+					 '单品-增加资源位-批量溢价',
+					 '批量出价',
+					 '钻展协议']
+	}))
 
 	//购物车打开，关闭事件
 	$('body .chrome-plug-spm-icon').on('click', function(event){
@@ -102,11 +155,17 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 		var name = $('body .chrome-plug-config-name').val()
 		var spmblist = []
 		var spmdlist = []
+		var dialoglist = []
 		_.each($('body .chrome-plug-spm-car-spmd .chrome-plug-spmbd-box'), function(item){
 			spmdlist.push($(item).attr('chrome-plug-spm-last'))
 		})
 		_.each($('body .chrome-plug-spm-car-spmb .chrome-plug-spmbd-box'), function(item){
 			spmblist.push($(item).attr('chrome-plug-spm-last'))
+		})
+		_.each($('body .chrome-plug-spm-input-dialog'), function(item){
+			if($(item).prop('checked')){
+				dialoglist.push($(item).attr('chrome-plug-spm-last'))
+			}
 		})
 		$.ajax({
 			url: '//data.alimama.net/api/user-config/add.json',
@@ -114,7 +173,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 				name: name,
 				spmdlist: spmdlist.join(','),
 				spmblist: spmblist.join(','),
-				dialoglist: ''
+				dialoglist: dialoglist.join(',')
 			},
 			dataType: 'json'
 		}).then(function(resp){
@@ -148,26 +207,26 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 		  //埋点数据template
 		  var tpl = function(){
 			  /*
-			  	  <div class="spm-box" style="padding:20px;background-color:#fff;color:#333;border:1px solid #eaeaea;position:absolute;top:<%= top%>px;left: <%= left%>px;z-index:999999;">
+			  	  <div class="spm-box" style="padding:20px;background-color:#fff;color:#333;border:1px solid #eaeaea;position:absolute;top:<%= top%>px;left: <%= left%>px;z-index:99999999999;">
 						<div style="margin-bottom:15px;">
 							<div>
-								spmd段为：<span class="data-spm-d" data-clipboard-target=".data-spm-d"><%= spmd%></span>
+								点击spmd段为：<span class="data-spm-d" data-clipboard-target=".data-spm-d"><%= spmd%></span>
 								<span style="margin-left:10px;">pv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmdObj.pv%></span></span>
 								<span style="margin-left:10px;">uv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmdObj.uv%></span></span>
 							</div>
 							<div class="mt10">
-								<input class="chrome-plug-spm-input" type="text" placeholder="自定义名称"/>
+								<input class="chrome-plug-spm-input" type="text" placeholder="点击自定义名称"/>
 								<button class="chrome-plug-spm-btn chrome-plug-spm-btn-addSpmd" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>">添加购物车</button>
 							</div>
 						</div>
 						<div style="margin-bottom:15px;">
 							<div>
-								spmb段为：<span class="data-spm-b" data-clipboard-target=".data-spm-b"><%= spmb%></span>
+								页面spmb段为：<span class="data-spm-b" data-clipboard-target=".data-spm-b"><%= spmb%></span>
 								<span style="margin-left:10px;">pv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmbObj.pv%></span></span>
 								<span style="margin-left:10px;">uv：<span style="color: #4d7fff;font-family:tahoma;font-weight: bold;"><%= spmbObj.uv%></span></span>
 							</div>
 							<div class="mt10">
-								<input class="chrome-plug-spm-input" type="text" placeholder="自定义名称"/>
+								<input class="chrome-plug-spm-input" type="text" placeholder="页面自定义名称"/>
 								<button class="chrome-plug-spm-btn chrome-plug-spm-btn-addSpmb" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>">添加购物车</button>
 							</div>
 						</div>
