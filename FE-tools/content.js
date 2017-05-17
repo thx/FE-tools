@@ -183,6 +183,11 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 			}
 			$('body .chrome-plug-save-error').empty()
 			$('body .chrome-plug-spm-icon').attr('data-switch', 'off').parent('.chrome-plug-spm-car').css('right','-300px')
+		},function(resp){
+			if(resp.status == 401){
+				$('body .chrome-plug-save-error').html('请先登录<a href="https://data.alimama.net" target="_blank">埋点平台</a>')
+				return false
+			}
 		})
 	})
 
