@@ -34,9 +34,10 @@
     font-size: 12px;
     line-height: 1.224489797;
     padding: 0 7px;
-    border-width: 1px;
-    border-style: solid;
-    background-color: #fff;
+    width: 220px;
+    background-color: #626473;
+    color: #fff; 
+    border: none;
     background-image: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -52,8 +53,32 @@
     -ms-transition: border-color .15s ease-out;
     -o-transition: border-color .15s ease-out;
     transition: border-color .15s ease-out;
-    border-color: #e6e6e6;
-    color: #333;
+}
+.chrome-plug-spm-input-common{
+    display: inline-block;
+    height: 26px;
+    font-size: 12px;
+    line-height: 1.224489797;
+    padding: 0 7px;
+    width: 160px;
+    background-color: #fff;
+    color: #333; 
+    border: 1px solid #eaeaea;
+    background-image: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color .15s ease-out;
+    -moz-transition: border-color .15s ease-out;
+    -ms-transition: border-color .15s ease-out;
+    -o-transition: border-color .15s ease-out;
+    transition: border-color .15s ease-out;
 }
 .chrome-plug-spm-input:focus{
     outline: 0;
@@ -63,7 +88,8 @@
 .chrome-plug-spm-car{
     position: fixed;
     top: 100px;
-    right: -300px;
+    right: -260px;
+    height: 160px;
     z-index: 9999999999;
     -webkit-transition: right .3s ease-out;
     -moz-transition: right .3s ease-out;
@@ -74,28 +100,89 @@
 .chrome-plug-spm-inlineblock{
     display: inline-block;
 }
+.chrome-plug-spm-icon{
+    width:40px;
+    height: 160px;
+    border-radius: 4px;
+}
+.chrome-plug-spm-icon-box{
+    width:40px;
+    height: 40px;
+    background-color: #070a22;
+    text-align: center;
+    padding: 11px 0px;
+}
+.chrome-plug-spm-icon-box .img18{
+    width:18px;
+}
+.chrome-plug-spm-icon-box .img20{
+    width:20px;
+}
+.chrome-plug-spm-icon-box-1{
+    border-top-left-radius:4px; 
+    border-top-right-radius:4px; 
+    background-color: #ed462f;
+}
+.chrome-plug-spm-icon-box-4{
+    border-bottom-left-radius:4px; 
+    border-bottom-right-radius:4px; 
+}
+.chrome-plug-spm-add-name{
+    color: #fff;
+}
+.chrome-plug-spm-count{
+    color: #fff;
+}
 .chrome-plug-spm-car-content{
     max-height: 600px;
-    min-height: 200px;
+    min-height: 500px;
     overflow: auto;
-    background-color: #fff;
-    width: 300px;
+    background-color: #070a22;
+    width: 260px;
     padding: 20px;
     border: 1px solid #eaeaea;
 }
-.chrome-plug-spm-input-box{
-    height: 200px;
-    max-height: 200px;
-    overflow: auto;
+.chrome-plug-spm-car-content-tab{
+    background-color: #626473;
+    margin: 0px -20px;
 }
-.chrome-plug-clear{
-    float: right;
+.chrome-plug-spm-car-content-tab-on{
+    color: #fff;
+    border-bottom: 1px solid #ed462f;
+}
+.chrome-plug-spm-car-content-title{
+    width: 127px;
+    height:30px;
+    text-align: center;
+    padding: 4px 0px;
+    color:#ccc;
+}
+.chrome-plug-spm-car-content-count{
+    color:#fff;
+    background-color: #ed462f;
+    padding: 0px 2px;
+    border-radius: 4px;
+}
+.chrome-plug-spm-input-box{
+    height: 400px;
+    max-height: 400px;
+    overflow: auto;
+    color: #fff;
 }
 .chrome-plug-save-error{
     color: red;
 }
+.chrome-plug-spm-hide{
+    display: none;
+}
+.chrome-plug-spm-pointer{
+    cursor: pointer;
+}
 .mr5{
     margin-right: 5px;
+}
+.mb5{
+    margin-bottom: 5px;
 }
 .mt10{
     margin-top: 10px;
@@ -106,9 +193,72 @@
 .ml10{
     margin-left: 10px;
 }
+.mb20{
+    margin-bottom: 20px;
+}
 .mt30{
     margin-top: 30px;
 }
 .fl{
     float: left;
+}
+::-webkit-input-placeholder{
+    color: #fff;
+}
+
+body .chrome-plug-spm-table {
+  width: 100%;
+  margin-bottom: 0;
+}
+body .chrome-plug-spm-table thead {
+  background-color: #fafafa;
+}
+body .chrome-plug-spm-table thead tr th {
+  height: 40px;
+  padding: 0 8px;
+  background-color: #FAFAFA;
+  color: #999;
+  font-weight: normal;
+  vertical-align: middle;
+  border: none;
+}
+body .chrome-plug-spm-table thead tr th:first-child {
+  padding-left: 15px;
+}
+body .chrome-plug-spm-table thead tr th:last-child {
+  padding-right: 15px;
+}
+
+body .chrome-plug-spm-table tbody a {
+  color: #333;
+}
+body .chrome-plug-spm-table tbody a:hover {
+  color: #4d7fff;
+}
+body .chrome-plug-spm-table tbody a.link {
+  color: #999;
+}
+body .chrome-plug-spm-table tbody a.s_fc_brand {
+  color: #4d7fff;
+}
+body .chrome-plug-spm-table tbody tr td {
+  padding: 12px 8px 12px;
+  line-height: 1.4;
+  max-height: 90px;
+  color: #333333;
+  border: none;
+  -webkit-transition: background-color 0.15s ease-out;
+  -moz-transition: background-color 0.15s ease-out;
+  -ms-transition: background-color 0.15s ease-out;
+  -o-transition: background-color 0.15s ease-out;
+  transition: background-color 0.15s ease-out;
+}
+body .chrome-plug-spm-table tbody tr td:first-child {
+  padding-left: 15px;
+}
+body .chrome-plug-spm-table tbody tr td:last-child {
+  padding-right: 15px;
+}
+body .chrome-plug-spm-table tbody tr td.align-right,body .chrome-plug-spm-table thead tr th.align-right {
+  text-align: right;
 }
