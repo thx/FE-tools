@@ -12,7 +12,7 @@
         "default_icon": "icon_off.png"
     },
     "content_scripts": [{
-        "matches": ["https://*.taobao.com/*"],
+        "matches": ["https://*.taobao.com/*", "http://*.taobao.com/*"],
         "js": ["jquery-2.0.0.min.js", "underscore.min.js", "clipboard.min.js", "content.js"],
         "css": ["content.css"]
     }],
