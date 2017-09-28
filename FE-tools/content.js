@@ -308,6 +308,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
                 $.ajax({
                     url: '//data.alimama.net/api/user-config/add.json',
                     data: {
+                        spma: spma,
                         name: name,
                         spmdlist: spmdlist.join(','),
                         spmblist: spmblist.join(','),
