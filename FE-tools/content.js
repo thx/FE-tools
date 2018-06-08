@@ -5,6 +5,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             localStorage.setItem('findSpmdIsOn', 'off')
             $('body').off('mouseenter mouseleave', '[data-spm-click]')
             $('body').off('mouseleave', '.spm-box')
+            $('body').off('click.plugin')
             $('body .chrome-plug-spm-car').remove()
             sendResponse('off')
         } else if (findSpmdIsOn == 'off') {
@@ -114,7 +115,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 }))
 
                 // 购物车打开，关闭事件
-                $('body .chrome-plug-spm-icon-shopping').on('click', function (event) {
+                $('body .chrome-plug-spm-icon-shopping').on('click.plugin', function (event) {
                     if ($(this).attr('data-switch') == 'off') {
                         $(this).attr('data-switch', 'on').attr('data-content', '关闭购物车').parents('.chrome-plug-spm-car').css('right', '0px')
                     } else {
@@ -148,7 +149,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 var spmTplFn = _.template(spmTpl)
 
                 // 添加spmd事件
-                $('body').on('click', '.chrome-plug-spm-btn-addSpmd', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmd', function (event) {
                     var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                     var spmb = $(this).attr('chrome-plug-spmb')
                     var spmd = $(this).attr('chrome-plug-spmd')
@@ -163,7 +164,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 })
 
                 // 添加spmb事件
-                $('body').on('click', '.chrome-plug-spm-btn-addSpmb', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmb', function (event) {
                     var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                     var spmb = $(this).attr('chrome-plug-spmb')
                     var name = $(this).parents('td').next('td').children('.chrome-plug-spm-span-common').text()
@@ -177,7 +178,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 })
 
                 // 添加全站整体事件
-                $('body').on('click', '.chrome-plug-spm-btn-addSpmTotal', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmTotal', function (event) {
                     var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                     var name = '全站整体'
                     $('body .chrome-plug-spm-car-spmTotal').append(spmTplFn({
@@ -190,7 +191,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 })
 
                 // 添加使用率事件
-                $('body').on('click', '.chrome-plug-spm-btn-addSpmPercent', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmPercent', function (event) {
                     var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                     var spmb = $(this).attr('chrome-plug-spmb')
                     var spmd = $(this).attr('chrome-plug-spmd')
@@ -210,17 +211,17 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 })
 
                 // 添加dialog
-                $('body .chrome-plug-spm-input-dialog').on('click', function (event) {
+                $('body .chrome-plug-spm-input-dialog').on('click.plugin', function (event) {
                     that.changeCounts()
                 })
                 // 删除spmb、spmd事件
-                $('body').on('click', '.chrome-plug-spm-btn-delete', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-delete', function (event) {
                     $(this).parent('.chrome-plug-spmbd-box').remove()
                     that.changeCounts()
                 })
 
                 // tab切换事件
-                $('body .chrome-plug-spm-car-content-title').on('click', function (event) {
+                $('body .chrome-plug-spm-car-content-title').on('click.plugin', function (event) {
                     var tab = $(this).attr('data-tab')
                     if (tab == '1') {
                         $(this).addClass('chrome-plug-spm-car-content-tab-on')
@@ -244,7 +245,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     }
                 })
                 // 保存提交
-                $('body').on('click', '.chrome-plug-spm-btn-save', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-btn-save', function (event) {
                     var name = $('body .chrome-plug-config-name').val()
                     var spmblist = []
                     var spmdlist = []
@@ -296,14 +297,14 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 })
 
                 // 一键清空事件
-                $('body .chrome-plug-clear').on('click', function (event) {
+                $('body .chrome-plug-clear').on('click.plugin', function (event) {
                     $('body .chrome-plug-spmbd-box').remove()
                     $('body .chrome-plug-spm-input-dialog').prop('checked', false)
                     that.changeCounts()
                 })
 
                 // 展开高级事件
-                $('body').on('click', '.chrome-plug-spm-advance-btn', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-advance-btn', function (event) {
                     var status = $(this).attr('data-status')
                     if (status == '1') {
                         $(this).attr('data-status', 2).text('收起高级设置 >>').next().show().end()
@@ -314,7 +315,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     }
                 })
                 //修改spmd名字事件
-                $('body').on('click', '.chrome-plug-spm-update-name', function (event) {
+                $('body').on('click.plugin', '.chrome-plug-spm-update-name', function (event) {
                     $(this).parents('.chrome-plug-spm-update').hide().next('input').show()
                 })
                 //发送修改spmd名字请求

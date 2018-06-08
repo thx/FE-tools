@@ -97,6 +97,9 @@
     -o-transition: right .3s ease-out;
     transition: right .3s ease-out;
 }
+.chrome-plug-spm-car *{
+    box-sizing: border-box;
+}
 .chrome-plug-spm-inlineblock{
     display: inline-block;
 }
@@ -209,6 +212,9 @@
 body .chrome-plug-spm-table {
   width: 100%;
   margin-bottom: 0;
+}
+body .chrome-plug-spm-table .hide {
+    display: none;
 }
 body .chrome-plug-spm-table thead {
   background-color: #fafafa;
