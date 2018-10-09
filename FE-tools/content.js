@@ -365,6 +365,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                     <tr>
                                                         <th>操作</th>
                                                         <th>埋点</th>
+                                                        <th>埋点ID</th>
                                                         <th class="align-right">pv</th>
                                                         <th class="align-right">uv</th>
                                                     </tr>
@@ -375,12 +376,15 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <img class="chrome-plug-spm-btn-addSpmd chrome-plug-spm-pointer" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
                                                         </td>
                                                         <td>
-                                                            <span tittle="<%= spmd%>">点击</span>
+                                                            <span>点击</span>
                                                             <span class="chrome-plug-spm-update ml10">
                                                                 <span class="chrome-plug-spm-span-common"><%= spmdObj.name%></span>
                                                                 <a href="javascript:;" class="chrome-plug-spm-update-name"><img style="width:20px;" src="https://img.alicdn.com/tfs/TB1yHcsdFGWBuNjy0FbXXb4sXXa-64-64.png"/></a>
                                                             </span>
                                                             <input class="chrome-plug-spm-input-common hide" chrome-plug-spmd="<%= spmd%>" type="text" value="<%= spmdObj.name%>"/>
+                                                        </td>
+                                                         <td>
+                                                            <span><%= spmd%></span>
                                                         </td>
                                                         <td class="align-right">
                                                             <span><%= spmdObj.pv%></span>
@@ -397,6 +401,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <span>页面</span>
                                                             <span class="chrome-plug-spm-span-common ml10"><%= spmbObj.name%></span>
                                                         </td>
+                                                        <td>
+                                                            <span><%= spmb%></span>
+                                                        </td>
                                                         <td class="align-right">
                                                             <span><%= spmbObj.pv%></span>
                                                         </td>
@@ -410,6 +417,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                         </td>
                                                         <td>
                                                             <span>全站整体</span>
+                                                        </td>
+                                                        <td>
+                                                            <span><%= spma%></span>
                                                         </td>
                                                         <td class="align-right">
                                                             <span><%= spmObj.pv%></span>
@@ -467,9 +477,14 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 dataType: 'json'
                             }).then(function (resp) {
                                 var data = resp.data
+                                data.spmd.name = data.spmd.name || spmd
+                                data.spmd.spmdId = spmd
+                                data.spmd.pv = data.spmd.pv || 0
+                                data.spmd.uv = data.spmd.uv || 0
                                 var htmlContent = tplFn({
                                     top: top,
                                     left: left,
+                                    spma: spma,
                                     spmb: spmb,
                                     spmd: spmd,
                                     spmbObj: data.spmb,
