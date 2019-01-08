@@ -344,7 +344,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     if (event.type == 'mouseenter') {
                         timer = setTimeout(function () {
                             var attr = $(that).attr('data-spm-click')
-                            var reg = /.*locaid=(.*)/
+                            var reg = /locaid=([^;]+);?/
                             var spma = $('meta[name="spm-id"]').attr('content')
                             var spmd = attr.match(reg)[1]
                             var winWidth = $(window).width()
