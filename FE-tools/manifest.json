@@ -3,7 +3,7 @@
 
     "name": "find spmd",
     "description": "find spmd",
-    "version": "3.0.7",
+    "version": "3.0.8",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
