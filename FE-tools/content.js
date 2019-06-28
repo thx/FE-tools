@@ -370,7 +370,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                                     <span class="chrome-plug-spm-span-common"><%= spmdObj.name%></span>
                                                                     <a href="javascript:;" class="chrome-plug-spm-update-name"><img style="width:20px;" src="https://img.alicdn.com/tfs/TB1yHcsdFGWBuNjy0FbXXb4sXXa-64-64.png"/></a>
                                                                 </span>
-                                                                <input class="chrome-plug-spm-input-common hide" chrome-plug-spmd="<%= spmd%>" type="text" value="<%= spmdObj.name%>"/>
+                                                                <input class="chrome-plug-spm-input-common chrome-plug-spm-hide" chrome-plug-spmd="<%= spmd%>" type="text" value="<%= spmdObj.name%>"/>
                                                             </td>
                                                              <td>
                                                                 <span><%= spmd%></span>
