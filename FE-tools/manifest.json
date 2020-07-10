@@ -1,9 +1,9 @@
 ﻿{
     "manifest_version": 2,
 
-    "name": "find spmd",
-    "description": "find spmd",
-    "version": "3.0.8",
+    "name": "mamadata",
+    "description": "mamadata",
+    "version": "3.1.0",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
@@ -12,13 +12,15 @@
         "default_icon": "icon_off.png"
     },
     "content_scripts": [{
-        "matches": ["https://*.taobao.com/*", "http://*.taobao.com/*", "http://*.alimama.com/*", "https://*.alimama.com/*"],
+        "matches": ["https://*.taobao.com/*", "http://*.taobao.com/*", "http://*.alimama.com/*", "https://*.alimama.com/*","https://sellercenter-staging.lazada.com.ph/*", "https://sellercenter.lazada.com.ph/*"],
         "js": ["jquery-2.0.0.min.js", "underscore.min.js", "clipboard.min.js", "content.js"],
         "css": ["content.css"]
     }],
     "permissions": [
         "activeTab",
         "https://*.taobao.com/*",
-        "https://*.alimama.net/*"
+        "https://*.alimama.net/*",
+        "https://sellercenter-staging.lazada.com.ph/*",
+        "https://sellercenter.lazada.com.ph/*"
     ]
 }

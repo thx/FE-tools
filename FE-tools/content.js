@@ -31,7 +31,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 {contentScriptQuery: "querySpmAll", spma: spma},
                 resp => {
                     var data = resp.data
-                    spmObj = data.list[0]
+                    spmObj = data.list[0] || {}
                     dialogList = _.map(data.dialogList, function (item) { return item.page_name })
                     // 购物车template
                     var carTpl = function () {
