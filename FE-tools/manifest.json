@@ -17,9 +17,6 @@
         "css": ["content.css"]
     }],
     "permissions": [
-        "activeTab",
-        "https://*.taobao.com/*",
-        "https://*.alimama.net/*",
-        "https://*.lazada.com.ph/*"
+        "https://fether.m.alibaba-inc.com/"
     ]
 }
