@@ -329,6 +329,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     // 埋点hover事件
                     var timer
                     $('body').on('mouseenter mouseleave', '[data-spm-click]', function (event) {
+                        event.stopPropagation()
                         var that = this
                         if (event.type == 'mouseenter') {
                             timer = setTimeout(function () {
