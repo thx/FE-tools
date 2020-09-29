@@ -89,7 +89,7 @@
     position: fixed;
     top: 100px;
     right: -260px;
-    height: 160px;
+    height: 192px;
     z-index: 9999999999;
     -webkit-transition: right .3s ease-out;
     -moz-transition: right .3s ease-out;

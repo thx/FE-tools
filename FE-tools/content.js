@@ -47,8 +47,11 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                     <div class="chrome-plug-spm-icon-box chrome-plug-clear" data-content="清空购物车">
                                         <img class="img18" src="https://img.alicdn.com/tfs/TB1UzyhRVXXXXcsXFXXXXXXXXXX-32-32.png" alt="清空购物车"/>
                                     </div>
-                                    <div class="chrome-plug-spm-icon-box chrome-plug-spm-icon-box-4 chrome-plug-spm-btn-save" data-content="保存分组">
+                                    <div class="chrome-plug-spm-icon-box chrome-plug-spm-btn-save" data-content="保存分组">
                                         <img class="img18" src="https://img.alicdn.com/tfs/TB1Xj5uRVXXXXX5XFXXXXXXXXXX-32-32.png" alt="保存分组"/>
+                                    </div>
+                                    <div class="chrome-plug-spm-icon-box chrome-plug-spm-icon-box-4" data-content="跳转小站">
+                                        <a href="https://mamadata.alibaba-inc.com/#!/report/index?spma=<%= spma%>" target="_blank"><img class="img18" src="https://img.alicdn.com/tfs/TB1HmBbWxD1gK0jSZFsXXbldVXa-128-128.png" alt="跳转小站"/></a>
                                     </div>
                                 </div>
                                 <div class="fl chrome-plug-spm-inlineblock chrome-plug-spm-car-content">
@@ -107,7 +110,8 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
     
                     var carTplFn = _.template(carTpl)
                     $('body').append(carTplFn({
-                        dialogList: dialogList
+                        dialogList: dialogList,
+                        spma: spma
                     }))
     
                     // 购物车打开，关闭事件
@@ -358,6 +362,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <th>埋点ID</th>
                                                             <th class="align-right">pv</th>
                                                             <th class="align-right">uv</th>
+                                                            <th class="align-right">操作</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -382,6 +387,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <td class="align-right">
                                                                 <span><%= spmdObj.uv%></span>
                                                             </td>
+                                                            <td class="align-right">
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-single?spma=<%= spma%>&spmd=<%= spmd%>" target="_blank">查看详情</a>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -400,6 +408,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <td class="align-right">
                                                                 <span><%= spmbObj.uv%></span>
                                                             </td>
+                                                            <td class="align-right">
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-page?spma=<%= spma%>&pageName=<%= spmbObj.name%>" target="_blank">查看详情</a>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -416,6 +427,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             </td>
                                                             <td class="align-right">
                                                                 <span><%= spmObj.uv%></span>
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/busy/whole?spma=<%= spma%>" target="_blank">查看详情</a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
