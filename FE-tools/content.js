@@ -345,7 +345,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 var offset = $(event.currentTarget).offset()
                                 var currentHeight = $(event.currentTarget).height()
                                 var spmb = $('body').attr('data-spm')
-                                var top = offset.top + currentHeight
+                                var top = offset.top + currentHeight - 5
                                 var left = offset.left
                                 if (left + 340 > winWidth) {
                                     left = left - 340
@@ -447,7 +447,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                                     <img class="chrome-plug-spm-btn-addSpmPercent" data-type="1" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
                                                                 </td>
                                                                 <td>
-                                                                    <input class="chrome-plug-spm-input-common" type="text" value="当前页打开率"/>
+                                                                    <input class="chrome-plug-spm-input-advance" type="text" value="当前页打开率"/>
                                                                 </td>
                                                                 <td class="align-right">
                                                                     <span>点击 / 页面</span>
@@ -458,7 +458,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                                     <img class="chrome-plug-spm-btn-addSpmPercent" data-type="2" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
                                                                 </td>
                                                                 <td>
-                                                                    <input class="chrome-plug-spm-input-common" type="text" value="全站点打开率"/>
+                                                                    <input class="chrome-plug-spm-input-advance" type="text" value="全站点打开率"/>
                                                                 </td>
                                                                 <td class="align-right">
                                                                     <span>点击 / 全站</span>

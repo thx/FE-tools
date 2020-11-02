@@ -3,7 +3,7 @@
 
     "name": "mamadata",
     "description": "mamadata",
-    "version": "3.1.2",
+    "version": "3.1.3",
     "background": {
         "scripts": ["background.js"],
         "persistent": false

@@ -54,7 +54,7 @@
     -o-transition: border-color .15s ease-out;
     transition: border-color .15s ease-out;
 }
-.chrome-plug-spm-input-common{
+.chrome-plug-spm-input-common, .chrome-plug-spm-input-advance{
     display: inline-block;
     height: 26px;
     font-size: 12px;
