@@ -44,6 +44,7 @@ chrome.runtime.onMessage.addListener(
 				body: JSON.stringify({
 					spma: request.spma,
 					spmb: request.spmb,
+					spmc: request.spmc,
 					spmd: request.spmd
 				}),
 				method: 'POST',
@@ -70,6 +71,7 @@ chrome.runtime.onMessage.addListener(
 					name: request.name,
 					spmalist: request.spmalist,
 					spmblist: request.spmblist,
+					spmclist: request.spmclist,
 					spmdlist: request.spmdlist,
 					percentlist: request.percentlist,
 					dialoglist: request.dialoglist

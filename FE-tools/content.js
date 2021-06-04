@@ -70,24 +70,14 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                         </div>
                                     </div>
                                     <div class="chrome-plug-spm-car-define">
-                                                        <div class="chrome-plug-spm-car-spmTotal">
-                                            <h4 class="chrome-plug-spm-hide">
-                                                全站整体
-                                            </h4>
-                                        </div>
                                         <div class="chrome-plug-spm-car-spmd">
                                             <h4 class="chrome-plug-spm-hide">
                                                 按钮列表
                                             </h4>
                                         </div>
-                                        <div class="chrome-plug-spm-car-spmb">
+                                        <div class="chrome-plug-spm-car-spmc">
                                             <h4 class="chrome-plug-spm-hide">
-                                                页面列表
-                                            </h4>
-                                        </div>
-                                        <div class="chrome-plug-spm-car-percent">
-                                            <h4 class="chrome-plug-spm-hide">
-                                                使用率列表
+                                                按钮列表
                                             </h4>
                                         </div>
                                     </div>
@@ -137,8 +127,8 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
     
                     var spmTpl = function () {
                         /*
-                            <div class="mt10 mb10 chrome-plug-spmbd-box" chrome-plug-spm-last="<%= name%>:<%= last%>">
-                                <span class="chrome-plug-spm-add-name"><%= name%></span>
+                            <div class="mt10 mb10 chrome-plug-spmbd-box" chrome-plug-spm-last="<%= name%>:<%= last%>:<%= type%>">
+                                <span class="chrome-plug-spm-add-name"><%= name%>:<%= typeName%></span>
                                 <span class="chrome-plug-spm-pointer chrome-plug-spm-btn-delete chrome-plug-spm-hide ml10">
                                     <img style="width: 16px;position:relative;top:1px;" src="https://img.alicdn.com/tfs/TB1QQ5hRVXXXXbRaXXXXXXXXXXX-20-20.png" alt="删除"/>
                                 </span>
@@ -148,65 +138,71 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
     
                     var spmTplFn = _.template(spmTpl)
     
-                    // 添加spmd事件
-                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmd', function (event) {
+                    // 添加spmd 点击数据事件
+                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmd-click', function (event) {
                         var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                         var spmb = $(this).attr('chrome-plug-spmb')
                         var spmd = $(this).attr('chrome-plug-spmd')
-                        var name = $(this).parents('td').next('td').find('.chrome-plug-spm-span-common').text()
+                        var name = $(this).attr('chrome-plug-spmd-name')
                         $('body .chrome-plug-spm-car-spmd').append(spmTplFn({
                             name: name,
                             key: spmd,
-                            last: spmd + '-' + spmb
+                            last: spmd + '-' + spmb,
+                            type: 'clk',
+                            typeName: '点击'
                         }))
-                        $(this).attr('src', src).removeClass('chrome-plug-spm-btn-addSpmd')
+                        $(this).removeClass('chrome-plug-spm-btn-addSpmd-click').html(`<img src="${src}"/>`)
                         that.changeCounts()
                     })
-    
-                    // 添加spmb事件
-                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmb', function (event) {
-                        var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
-                        var spmb = $(this).attr('chrome-plug-spmb')
-                        var name = $(this).parents('td').next('td').children('.chrome-plug-spm-span-common').text()
-                        $('body .chrome-plug-spm-car-spmb').append(spmTplFn({
-                            name: name,
-                            key: spmb,
-                            last: spmb
-                        }))
-                        $(this).attr('src', src).removeClass('chrome-plug-spm-btn-addSpmb')
-                        that.changeCounts()
-                    })
-    
-                    // 添加全站整体事件
-                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmTotal', function (event) {
-                        var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
-                        var name = '全站整体'
-                        $('body .chrome-plug-spm-car-spmTotal').append(spmTplFn({
-                            name: name,
-                            key: spma,
-                            last: spma
-                        }))
-                        $(this).attr('src', src).removeClass('chrome-plug-spm-btn-addSpmTotal')
-                        that.changeCounts()
-                    })
-    
-                    // 添加使用率事件
-                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmPercent', function (event) {
+
+                    // 添加spmd hover数据事件
+                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmd-hover', function (event) {
                         var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
                         var spmb = $(this).attr('chrome-plug-spmb')
                         var spmd = $(this).attr('chrome-plug-spmd')
-                        var name = $(this).parents('td').next('td').children('input').val()
-                        var last
-                        if ($(this).attr('data-type') == '1') {
-                            last = spmd + '-' + spmb + '/' + 'spmb-' + spmb
-                        } else {
-                            last = spmd + '-' + spmb + '/' + 'spma-' + spma
-                        }
-                        $('body .chrome-plug-spm-car-percent').append(spmTplFn({
+                        var name = $(this).attr('chrome-plug-spmd-name')
+                        $('body .chrome-plug-spm-car-spmd').append(spmTplFn({
                             name: name,
-                            last: last
+                            key: spmd,
+                            last: spmd + '-' + spmb,
+                            type: 'hover',
+                            typeName: 'hover'
                         }))
-                        $(this).attr('src', src).removeClass('chrome-plug-spm-btn-addSpmPercent')
+                        $(this).removeClass('chrome-plug-spm-btn-addSpmd-click').html(`<img src="${src}"/>`)
+                        that.changeCounts()
+                    })
+    
+                    // 添加spmc 曝光数据事件
+                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmc-exp', function (event) {
+                        var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
+                        var spmb = $(this).attr('chrome-plug-spmb')
+                        var spmc = $(this).attr('chrome-plug-spmc')
+                        var name = $(this).attr('chrome-plug-spmc-name')
+                        $('body .chrome-plug-spm-car-spmc').append(spmTplFn({
+                            name: name,
+                            key: spmc,
+                            last: spmc + '-' + spmb,
+                            type: 'exp',
+                            typeName: '曝光'
+                        }))
+                        $(this).removeClass('chrome-plug-spm-btn-addSpmc-exp').html(`<img src="${src}"/>`)
+                        that.changeCounts()
+                    })
+
+                    // 添加spmc hover数据事件
+                    $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmc-hover', function (event) {
+                        var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
+                        var spmb = $(this).attr('chrome-plug-spmb')
+                        var spmc = $(this).attr('chrome-plug-spmc')
+                        var name = $(this).attr('chrome-plug-spmc-name')
+                        $('body .chrome-plug-spm-car-spmc').append(spmTplFn({
+                            name: name,
+                            key: spmc,
+                            last: spmc + '-' + spmb,
+                            type: 'hover',
+                            typeName: 'hover'
+                        }))
+                        $(this).removeClass('chrome-plug-spm-btn-addSpmc-hover').html(`<img src="${src}"/>`)
                         that.changeCounts()
                     })
     
@@ -247,22 +243,14 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     // 保存提交
                     $('body').on('click.plugin', '.chrome-plug-spm-btn-save', function (event) {
                         var name = $('body .chrome-plug-config-name').val()
-                        var spmblist = []
+                        var spmclist = []
                         var spmdlist = []
                         var dialoglist = []
-                        var spmalist = []
-                        var percentlist = []
                         _.each($('body .chrome-plug-spm-car-spmd .chrome-plug-spmbd-box'), function (item) {
                             spmdlist.push($(item).attr('chrome-plug-spm-last'))
                         })
-                        _.each($('body .chrome-plug-spm-car-spmb .chrome-plug-spmbd-box'), function (item) {
-                            spmblist.push($(item).attr('chrome-plug-spm-last'))
-                        })
-                        _.each($('body .chrome-plug-spm-car-spmTotal .chrome-plug-spmbd-box'), function (item) {
-                            spmalist.push($(item).attr('chrome-plug-spm-last'))
-                        })
-                        _.each($('body .chrome-plug-spm-car-percent .chrome-plug-spmbd-box'), function (item) {
-                            percentlist.push($(item).attr('chrome-plug-spm-last'))
+                        _.each($('body .chrome-plug-spm-car-spmc .chrome-plug-spmbd-box'), function (item) {
+                            spmclist.push($(item).attr('chrome-plug-spm-last'))
                         })
                         _.each($('body .chrome-plug-spm-input-dialog'), function (item) {
                             if ($(item).prop('checked')) {
@@ -275,9 +263,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 spma: spma,
                                 name: name,
                                 spmdlist: spmdlist.join(','),
-                                spmblist: spmblist.join(','),
-                                spmalist: spmalist.join(','),
-                                percentlist: percentlist.join(','),
+                                spmclist: spmclist.join(','),
                                 dialoglist: dialoglist.join(',')
                             },
                             resp => {
@@ -345,41 +331,45 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 var offset = $(event.currentTarget).offset()
                                 var currentHeight = $(event.currentTarget).height()
                                 var spmb = $('body').attr('data-spm')
+                                var spmcNode = $(that).parents('[data-spm]')[0]
+                                var spmc = $(spmcNode).attr('data-spm')
                                 var top = offset.top + currentHeight - 5
                                 var left = offset.left
-                                if (left + 340 > winWidth) {
-                                    left = left - 340
+                                if (left + 800 > winWidth) {
+                                    left = winWidth - 800
                                 }
                                 // 埋点数据template
                                 var tpl = function () {
                                     /*
-                                        <div class="spm-box" style="background-color:#fff;color:#333;border:1px solid #eaeaea;position:absolute;top:<%= top%>px;left: <%= left%>px;z-index:99999999999;">
+                                        <div class="spm-box" style="width:800px;background-color:#fff;color:#333;border:1px solid #eaeaea;position:absolute;top:<%= top%>px;left: <%= left%>px;z-index:99999999999;">
                                                 <table class="chrome-plug-spm-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>操作</th>
-                                                            <th>埋点</th>
+                                                            <th>埋点名称</th>
                                                             <th>埋点ID</th>
-                                                            <th class="align-right">pv</th>
-                                                            <th class="align-right">uv</th>
+                                                            <th>类型</th>
+                                                            <th class="align-right">PV</th>
+                                                            <th class="align-right">UV</th>
+                                                            <th>页面/全站uv占比</th>
+                                                            <th>曝光/hover时长</th>
+                                                            <th>决策时长</th>   
                                                             <th class="align-right">操作</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>
-                                                                <img class="chrome-plug-spm-btn-addSpmd chrome-plug-spm-pointer" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
-                                                            </td>
-                                                            <td>
-                                                                <span>点击</span>
+                                                            <td rowspan=2>
                                                                 <span class="chrome-plug-spm-update ml10">
                                                                     <span class="chrome-plug-spm-span-common"><%= spmdObj.name%></span>
-                                                                    <a href="javascript:;" class="chrome-plug-spm-update-name"><img style="width:20px;" src="https://img.alicdn.com/tfs/TB1yHcsdFGWBuNjy0FbXXb4sXXa-64-64.png"/></a>
+                                                                    <a href="javascript:;" class="chrome-plug-spm-update-name"><img style="width:16px;" src="https://img.alicdn.com/tfs/TB1yHcsdFGWBuNjy0FbXXb4sXXa-64-64.png"/></a>
                                                                 </span>
                                                                 <input class="chrome-plug-spm-input-common chrome-plug-spm-hide" chrome-plug-spmd="<%= spmd%>" type="text" value="<%= spmdObj.name%>"/>
                                                             </td>
-                                                             <td>
+                                                             <td rowspan=2>
                                                                 <span><%= spmd%></span>
+                                                            </td>
+                                                            <td>
+                                                                <span>点击-点击</span>
                                                             </td>
                                                             <td class="align-right">
                                                                 <span><%= spmdObj.pv%></span>
@@ -387,49 +377,109 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             <td class="align-right">
                                                                 <span><%= spmdObj.uv%></span>
                                                             </td>
+                                                            <td>
+                                                                <span><%= ((spmdObj.uv/spmbObj.uv)*100).toFixed(2)%>%</span>
+                                                                /
+                                                                <span><%= ((spmdObj.uv/spmObj.muv)*100).toFixed(2)%>%</span>
+                                                            </td>
+                                                            <td>
+                                                                -
+                                                            </td>
+                                                            <td>
+                                                                <span><%= (spmdObj.dectime/1000).toFixed(0)%></span>
+                                                            </td>
                                                             <td class="align-right">
-                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-single?spma=<%= spma%>&spmd=<%= spmd%>" target="_blank">查看详情</a>
+                                                                <a href="javascript:;" class="chrome-plug-spm-btn-addSpmd-click chrome-plug-spm-pointer chrome-plug-spm-handle" chrome-plug-spmd-name="<%= spmdObj.name%>" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>">添加</a>
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-single?spma=<%= spma%>&spmd=<%= spmd%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <img class="chrome-plug-spm-btn-addSpmb chrome-plug-spm-pointer" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
+                                                                <span>点击-Hover</span>
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <span><%= spmdHover.pv%></span>
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <span><%= spmdHover.uv%></span>
                                                             </td>
                                                             <td>
-                                                                <span>页面</span>
-                                                                <span class="chrome-plug-spm-span-common ml10"><%= spmbObj.name%></span>
+                                                                <span><%= ((spmdHover.uv/spmbObj.uv)*100).toFixed(2)%>%</span>
+                                                                /
+                                                                <span><%= ((spmdHover.uv/spmObj.muv)*100).toFixed(2)%>%</span>
                                                             </td>
                                                             <td>
-                                                                <span><%= spmb%></span>
+                                                                <span><%= (spmdHover.duration/1000).toFixed(2)%></span>
+                                                            </td>
+                                                            <td>
+                                                                -
                                                             </td>
                                                             <td class="align-right">
-                                                                <span><%= spmbObj.pv%></span>
+                                                                <a href="javascript:;" class="chrome-plug-spm-btn-addSpmd-hover chrome-plug-spm-pointer chrome-plug-spm-handle" chrome-plug-spmd-name="<%= spmdObj.name%>" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>">添加</a>
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-hover?spma=<%= spma%>&spmb=<%= spmb%>&hoverkey=<%= spmd%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td rowspan=2>
+                                                                <span class="chrome-plug-spm-update ml10">
+                                                                    <span class="chrome-plug-spm-span-common"><%= spmcObj.name%></span>
+                                                                    <a href="javascript:;" class="chrome-plug-spm-update-name"><img style="width:16px;" src="https://img.alicdn.com/tfs/TB1yHcsdFGWBuNjy0FbXXb4sXXa-64-64.png"/></a>
+                                                                </span>
+                                                                <input class="chrome-plug-spm-input-common chrome-plug-spm-hide" chrome-plug-spmc="<%= spmc%>" type="text" value="<%= spmcObj.name%>"/>
+                                                            </td>
+                                                             <td rowspan=2>
+                                                                <span><%= spmc%></span>
+                                                            </td>
+                                                            <td>
+                                                                <span>模块-曝光</span>
                                                             </td>
                                                             <td class="align-right">
-                                                                <span><%= spmbObj.uv%></span>
+                                                                <span><%= spmcObj.pv%></span>
                                                             </td>
                                                             <td class="align-right">
-                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-page?spma=<%= spma%>&pageName=<%= spmbObj.name%>" target="_blank">查看详情</a>
+                                                                <span><%= spmcObj.uv%></span>
+                                                            </td>
+                                                            <td>
+                                                                <span><%= ((spmcObj.uv/spmbObj.uv)*100).toFixed(2)%>%</span>
+                                                                /
+                                                                <span><%= ((spmcObj.uv/spmObj.muv)*100).toFixed(2)%>%</span>
+                                                            </td>
+                                                            <td>
+                                                                <span><%= (spmcObj.duration/1000).toFixed(0)%></span>
+                                                            </td>
+                                                            <td>
+                                                                -
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <a href="javascript:;" class="chrome-plug-spm-btn-addSpmc-exp chrome-plug-spm-pointer chrome-plug-spm-handle" chrome-plug-spmc-name="<%= spmcObj.name%>" chrome-plug-spmc="<%= spmc%>" chrome-plug-spmb="<%= spmb%>">添加</a>
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-exp?spma=<%= spma%>&spmc=<%= spmc%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <img class="chrome-plug-spm-btn-addSpmTotal chrome-plug-spm-pointer" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
+                                                                <span>曝光-Hover</span>
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <span><%= spmcHover.pv%></span>
+                                                            </td>
+                                                            <td class="align-right">
+                                                                <span><%= spmcHover.uv%></span>
                                                             </td>
                                                             <td>
-                                                                <span>全站整体</span>
+                                                                <span><%= ((spmcHover.uv/spmbObj.uv)*100).toFixed(2)%>%</span>
+                                                                /
+                                                                <span><%= ((spmcHover.uv/spmObj.muv)*100).toFixed(2)%>%</span>
                                                             </td>
                                                             <td>
-                                                                <span><%= spma%></span>
+                                                                <span><%= (spmcHover.duration/1000).toFixed(2)%></span>
+                                                            </td>
+                                                            <td>
+                                                                <span><%= (spmcHover.dectime/1000).toFixed(2)%></span>
                                                             </td>
                                                             <td class="align-right">
-                                                                <span><%= spmObj.pv%></span>
-                                                            </td>
-                                                            <td class="align-right">
-                                                                <span><%= spmObj.uv%></span>
-                                                            </td>
-                                                            <td class="align-right">
-                                                                <a href="https://mamadata.alibaba-inc.com/#!/busy/whole?spma=<%= spma%>" target="_blank">查看详情</a>
+                                                                <a href="javascript:;" class="chrome-plug-spm-btn-addSpmc-hover chrome-plug-spm-pointer chrome-plug-spm-handle" chrome-plug-spmc-name="<%= spmcObj.name%>" chrome-plug-spmc="<%= spmc%>" chrome-plug-spmb="<%= spmb%>">添加</a>
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-hover?spma=<%= spma%>&spmb=<%= spmb%>&hoverkey=<%= spmc%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -472,7 +522,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 }.toString().replace(/[\r\n]/g, '').replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
                                 var tplFn = _.template(tpl)
                                 chrome.runtime.sendMessage(
-                                    {contentScriptQuery: "querySpmd", spma: spma, spmb: spmb, spmd: spmd},
+                                    {contentScriptQuery: "querySpmd", spma, spmb, spmc, spmd},
                                     resp => {
                                         var data = resp.data
                                         data.spmd.name = data.spmd.name || spmd
@@ -480,14 +530,18 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                         data.spmd.pv = data.spmd.pv || 0
                                         data.spmd.uv = data.spmd.uv || 0
                                         var htmlContent = tplFn({
-                                            top: top,
-                                            left: left,
-                                            spma: spma,
-                                            spmb: spmb,
-                                            spmd: spmd,
+                                            top,
+                                            left,
+                                            spma,
+                                            spmb,
+                                            spmc,
+                                            spmd,
                                             spmbObj: data.spmb,
                                             spmdObj: data.spmd,
-                                            spmObj: spmObj
+                                            spmcObj: data.spmc,
+                                            spmcHover: data.spmcHover,
+                                            spmdHover: data.spmdHover,
+                                            spmObj
                                         })
                                         $('body').append(htmlContent)
                                     })

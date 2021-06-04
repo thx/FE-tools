@@ -228,9 +228,9 @@ body .chrome-plug-spm-table thead tr th {
   vertical-align: middle;
   border: none;
 }
-body .chrome-plug-spm-table thead tr th:first-child {
+/* body .chrome-plug-spm-table thead tr th:first-child {
   padding-left: 15px;
-}
+} */
 body .chrome-plug-spm-table thead tr th:last-child {
   padding-right: 15px;
 }
@@ -259,12 +259,11 @@ body .chrome-plug-spm-table tbody tr td {
   -o-transition: background-color 0.15s ease-out;
   transition: background-color 0.15s ease-out;
 }
-body .chrome-plug-spm-table tbody tr td:first-child {
-  padding-left: 15px;
-}
-body .chrome-plug-spm-table tbody tr td:last-child {
-  padding-right: 15px;
-}
+
 body .chrome-plug-spm-table tbody tr td.align-right,body .chrome-plug-spm-table thead tr th.align-right {
   text-align: right;
+}
+
+body .chrome-plug-spm-handle{
+    color: #7E61F2 !important;
 }
