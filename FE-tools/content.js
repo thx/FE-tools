@@ -28,7 +28,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             var spmObj = {} // 全店整体数据
             var dialogList = []
             chrome.runtime.sendMessage(
-                {contentScriptQuery: "querySpmAll", spma: spma},
+                { contentScriptQuery: "querySpmAll", spma: spma },
                 resp => {
                     var data = resp.data
                     spmObj = data.list[0] || {}
@@ -97,13 +97,13 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                             </div>
                         */
                     }.toString().replace(/[\r\n]/g, '').replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
-    
+
                     var carTplFn = _.template(carTpl)
                     $('body').append(carTplFn({
                         dialogList: dialogList,
                         spma: spma
                     }))
-    
+
                     // 购物车打开，关闭事件
                     $('body .chrome-plug-spm-icon-shopping').on('click.plugin', function (event) {
                         if ($(this).attr('data-switch') == 'off') {
@@ -112,7 +112,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                             $(this).attr('data-switch', 'off').attr('data-content', '展开购物车').parents('.chrome-plug-spm-car').css('right', '-260px')
                         }
                     })
-    
+
                     // 图标hover tips事件
                     $('body .chrome-plug-spm-icon-box').hover(function (event) {
                         var content = $(this).attr('data-content')
@@ -124,7 +124,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     }, function (event) {
                         $('body .chrome-plug-spm-icon-tips').remove()
                     })
-    
+
                     var spmTpl = function () {
                         /*
                             <div class="mt10 mb10 chrome-plug-spmbd-box" chrome-plug-spm-last="<%= name%>:<%= last%>:<%= type%>">
@@ -135,9 +135,31 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                             </div>
                         */
                     }.toString().replace(/[\r\n]/g, '').replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
-    
+
                     var spmTplFn = _.template(spmTpl)
-    
+
+                    var advanceTpl = function () {
+                        /*
+                             <div class="chrome-plug-spm-table mt20">
+                                <div class="clearfix">
+                                    <select class="chrome-plug-spm-singleSelect chrome-plug-spm-singleSelect-1  mr20">
+                                    </select>
+                                    <select class="chrome-plug-spm-singleSelect chrome-plug-spm-singleSelect-2 mr20">
+                                    </select>
+                                    <select class="chrome-plug-spm-singleSelect chrome-plug-spm-singleSelect-3">
+                                    </select>
+                                </div>
+                                <div class="mt20 mb20">
+                                    <a href="javascript:;" class="btn btn-brand mr10 chrome-plug-spm-select-save">保存设置</a>
+                                    <a href="javascript:;" class="btn chrome-plug-spm-select-clear">清除设置</a>
+                                    <span class="ml10 chrome-plug-spm-select-result"></span>
+                                </div>
+                            </div>
+                        */
+                    }.toString().replace(/[\r\n]/g, '').replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
+
+                    var advanceTplFn = _.template(advanceTpl)
+
                     // 添加spmd 点击数据事件
                     $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmd-click', function (event) {
                         var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
@@ -171,7 +193,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         $(this).removeClass('chrome-plug-spm-btn-addSpmd-click').html(`<img src="${src}"/>`)
                         that.changeCounts()
                     })
-    
+
                     // 添加spmc 曝光数据事件
                     $('body').on('click.plugin', '.chrome-plug-spm-btn-addSpmc-exp', function (event) {
                         var src = 'https://img.alicdn.com/tfs/TB1O7atRVXXXXapXVXXXXXXXXXX-20-20.png'
@@ -205,7 +227,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         $(this).removeClass('chrome-plug-spm-btn-addSpmc-hover').html(`<img src="${src}"/>`)
                         that.changeCounts()
                     })
-    
+
                     // 添加dialog
                     $('body .chrome-plug-spm-input-dialog').on('click.plugin', function (event) {
                         that.changeCounts()
@@ -215,7 +237,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         $(this).parent('.chrome-plug-spmbd-box').remove()
                         that.changeCounts()
                     })
-    
+
                     // tab切换事件
                     $('body .chrome-plug-spm-car-content-title').on('click.plugin', function (event) {
                         var tab = $(this).attr('data-tab')
@@ -231,7 +253,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 .next('.chrome-plug-spm-car-dialog').show()
                         }
                     })
-    
+
                     // hover 显示删除
                     $('body').on('mouseenter mouseleave', '.chrome-plug-spmbd-box', function (event) {
                         if (event.type == 'mouseenter') {
@@ -259,7 +281,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         })
                         chrome.runtime.sendMessage(
                             {
-                                contentScriptQuery: "addConfig", 
+                                contentScriptQuery: "addConfig",
                                 spma: spma,
                                 name: name,
                                 spmdlist: spmdlist.join(','),
@@ -275,20 +297,157 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                 $('body .chrome-plug-spm-icon-shopping').attr('data-switch', 'off').attr('data-content', '展开购物车').parents('.chrome-plug-spm-car').css('right', '-260px')
                             })
                     })
-    
+
                     // 一键清空事件
                     $('body .chrome-plug-clear').on('click.plugin', function (event) {
                         $('body .chrome-plug-spmbd-box').remove()
                         $('body .chrome-plug-spm-input-dialog').prop('checked', false)
                         that.changeCounts()
                     })
-    
+
                     // 展开高级事件
                     $('body').on('click.plugin', '.chrome-plug-spm-advance-btn', function (event) {
                         var status = $(this).attr('data-status')
                         if (status == '1') {
-                            $(this).attr('data-status', 2).text('收起高级设置 >>').next().show().end()
-                                .parents('.chrome-plug-spm-advance').children('.chrome-plug-spm-table').show()
+                            if ($(this).parents('.chrome-plug-spm-advance').children('.chrome-plug-spm-table') && $(this).parents('.chrome-plug-spm-advance').children('.chrome-plug-spm-table').length) {
+                                $(this).attr('data-status', 2).text('收起高级设置 >>').next().show().end()
+                                    .parents('.chrome-plug-spm-advance').children('.chrome-plug-spm-table').show()
+                            } else {
+                                var htmlContent = advanceTplFn()
+                                $(this).attr('data-status', 2).text('收起高级设置 >>')
+                                    .parents('.chrome-plug-spm-advance').append(htmlContent).show()
+                                var parent = $(this).parents('.chrome-plug-spm-advance')
+                                var spma = parent.attr('chrome-plug-spma')
+                                var spmb = parent.attr('chrome-plug-spmb')
+                                var spmc = parent.attr('chrome-plug-spmc')
+                                var spmd = parent.attr('chrome-plug-spmd')
+                                chrome.runtime.sendMessage(
+                                    { contentScriptQuery: "queryNameConfig", spma, spmb, spmc, spmd },
+                                    resp => {
+                                        if (resp.data) {
+                                            var data = resp.data
+                                            $('.chrome-plug-spm-singleSelect-1').select2({
+                                                width: 160,
+                                                data: [{
+                                                    id: data.fName,
+                                                    text: data.fName
+                                                }],
+                                                placeholder:'请选择一级指标',
+                                                disabled: true
+                                            })
+                                            $('.chrome-plug-spm-singleSelect-2').select2({
+                                                width: 160,
+                                                data: [{
+                                                    id: data.sName,
+                                                    text: data.sName
+                                                }],
+                                                placeholder:'请选择二级指标',
+                                                disabled: true
+                                            })
+                                            $('.chrome-plug-spm-singleSelect-3').select2({
+                                                width: 160,
+                                                data: [{
+                                                    id: data.tName,
+                                                    text: data.tName
+                                                }],
+                                                placeholder:'请选择三级指标',
+                                                disabled: true
+                                            })
+                                        } else {
+                                            chrome.runtime.sendMessage(
+                                                { contentScriptQuery: "queryNameList" },
+                                                resp => {
+                                                    var data = resp.data
+                                                    var nameList = data.nameList
+                                                    var dataList = nameList.map(item => {
+                                                        return {
+                                                            id: item.fName,
+                                                            text: item.fName
+                                                        }
+                                                    })
+                                                    dataList.unshift({
+                                                        id: '请选择一级指标',
+                                                        text: '请选择一级指标'
+                                                    })
+                                                    $('.chrome-plug-spm-singleSelect-1').select2({
+                                                        width: 160,
+                                                        data: dataList,
+                                                        placeholder:'请选择一级指标'
+                                                    })
+                                                    $('.chrome-plug-spm-singleSelect-2').select2({
+                                                        width: 160,
+                                                        disabled: true,
+                                                        placeholder:'请选择二级指标'
+                                                    })
+                                                    $('.chrome-plug-spm-singleSelect-3').select2({
+                                                        width: 160,
+                                                        disabled: true,
+                                                        placeholder:'请选择三级指标'
+                                                    })
+                                                    var fName, sName;
+                                                    // 第一个下拉框选择后
+                                                    $('.chrome-plug-spm-singleSelect-1').on('change', function () {
+                                                        fName = $('.chrome-plug-spm-singleSelect-1').val()
+                                                        chrome.runtime.sendMessage(
+                                                            { contentScriptQuery: "queryNameList", fName },
+                                                            resp => {
+                                                                var data = resp.data
+                                                                var nameList = data.nameList
+                                                                var dataList = nameList.map(item => {
+                                                                    return {
+                                                                        id: item.sName,
+                                                                        text: item.sName
+                                                                    }
+                                                                })
+                                                                dataList.unshift({
+                                                                    id: '请选择二级指标',
+                                                                    text: '请选择二级指标'
+                                                                })
+                                                                $('.chrome-plug-spm-singleSelect-2').select2({
+                                                                    width: 160,
+                                                                    disabled: false,
+                                                                    data: dataList,
+                                                                    placeholder:'请选择二级指标'
+                                                                })
+                                                                $('.chrome-plug-spm-singleSelect-3').select2({
+                                                                    width: 160,
+                                                                    disabled: true,
+                                                                    placeholder:'请选择三级指标'
+                                                                })
+                                                            })
+                                                    })
+
+                                                    // 第二个下拉框选择后
+                                                    $('.chrome-plug-spm-singleSelect-2').on('change', function () {
+                                                        sName = $('.chrome-plug-spm-singleSelect-2').val()
+                                                        chrome.runtime.sendMessage(
+                                                            { contentScriptQuery: "queryNameList", fName, sName },
+                                                            resp => {
+                                                                var data = resp.data
+                                                                var nameList = data.nameList
+                                                                var dataList = nameList.map(item => {
+                                                                    return {
+                                                                        id: item.tName,
+                                                                        text: item.tName
+                                                                    }
+                                                                })
+                                                                dataList.unshift({
+                                                                    id: '请选择三级指标',
+                                                                    text: '请选择三级指标'
+                                                                })
+                                                                $('.chrome-plug-spm-singleSelect-3').select2({
+                                                                    width: 160,
+                                                                    disabled: false,
+                                                                    data: dataList,
+                                                                    placeholder:'请选择三级指标'
+                                                                })
+                                                            })
+                                                    })
+                                                })
+                                        }
+                                    })
+
+                            }
                         } else {
                             $(this).attr('data-status', 1).text('展开高级设置 >>').next().hide().end()
                                 .parents('.chrome-plug-spm-advance').children('.chrome-plug-spm-table').hide()
@@ -305,7 +464,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         var me = this
                         chrome.runtime.sendMessage(
                             {
-                                contentScriptQuery: "addSpmdName", 
+                                contentScriptQuery: "addSpmdName",
                                 spma: spma,
                                 spmd: spmd,
                                 name: newName
@@ -485,44 +644,15 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                     </tbody>
                                                 </table>
                                                 <div style="width:100%;height:1px;background-color:#eaeaea;"></div>
-                                                <div class="chrome-plug-spm-advance">
-                                                    <div class="mb10 mt10" style="padding: 0px 15px;overflow:hidden;">
-                                                        <div class="fl chrome-plug-spm-advance-btn chrome-plug-spm-pointer" data-status="1">展开高级指标 >></div>
-                                                        <span class="fr chrome-plug-spm-hide">公式（UV占比）</span>
-                                                    </div>
-                                                    <table class="chrome-plug-spm-table chrome-plug-spm-hide">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <img class="chrome-plug-spm-btn-addSpmPercent" data-type="1" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
-                                                                </td>
-                                                                <td>
-                                                                    <input class="chrome-plug-spm-input-advance" type="text" value="当前页打开率"/>
-                                                                </td>
-                                                                <td class="align-right">
-                                                                    <span>点击 / 页面</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img class="chrome-plug-spm-btn-addSpmPercent" data-type="2" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>" src="https://img.alicdn.com/tfs/TB176KiRVXXXXcEaXXXXXXXXXXX-20-20.png" alt="操作"/>
-                                                                </td>
-                                                                <td>
-                                                                    <input class="chrome-plug-spm-input-advance" type="text" value="全站点打开率"/>
-                                                                </td>
-                                                                <td class="align-right">
-                                                                    <span>点击 / 全站</span>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <div class="chrome-plug-spm-advance mb10 mt10"  chrome-plug-spmc="<%= spmc%>" chrome-plug-spmb="<%= spmb%>" chrome-plug-spma="<%= spma%>" chrome-plug-spmd="<%= spmd%>" style="padding: 0px 15px;overflow:hidden;">
+                                                    <div class="chrome-plug-spm-advance-btn chrome-plug-spm-pointer w100" data-status="1">展开高级指标 >></div>
                                                 </div>
                                         </div>
                                     */
                                 }.toString().replace(/[\r\n]/g, '').replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, '').replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
                                 var tplFn = _.template(tpl)
                                 chrome.runtime.sendMessage(
-                                    {contentScriptQuery: "querySpmd", spma, spmb, spmc, spmd},
+                                    { contentScriptQuery: "querySpmd", spma, spmb, spmc, spmd },
                                     resp => {
                                         var data = resp.data
                                         data.spmd.name = data.spmd.name || spmd
@@ -545,9 +675,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                         })
                                         $('body').append(htmlContent)
                                     })
-                                // window.clipSpmd = new Clipboard('.data-spm-d')
-                                // window.clipSpmb = new Clipboard('.data-spm-b')
-                                // window.clipSpmCopy = new Clipboard('.data-spm-copy')
                             }, 400)
                         } else if (event.type == 'mouseleave') {
                             if ($(event.relatedTarget).parents('.spm-box').length) return
@@ -555,8 +682,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                             $('body .spm-box').remove()
                         }
                     })
-    
-                    $('body').on('mouseleave', '.spm-box', function () {
+
+                    $('body').on('mouseleave', '.spm-box', function (event) {
+                        if ($(event.relatedTarget).parents('.select2-container').length) return
                         // window.clipSpmb.destroy()
                         // window.clipSpmd.destroy()
                         // window.clipSpmCopy.destroy()
@@ -565,6 +693,45 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                         // delete window.clipSpmCopy
                         $(this).remove()
                     })
+
+                    $('body').on('click.plugin', '.chrome-plug-spm-select-save', function (event) {
+                        var fName = $('.chrome-plug-spm-singleSelect-1').val()
+                        var sName = $('.chrome-plug-spm-singleSelect-2').val()
+                        var tName = $('.chrome-plug-spm-singleSelect-3').val()
+                        var parent = $(this).parents('.chrome-plug-spm-advance')
+                        var spma = parent.attr('chrome-plug-spma')
+                        var spmb = parent.attr('chrome-plug-spmb')
+                        var spmc = parent.attr('chrome-plug-spmc')
+                        var spmd = parent.attr('chrome-plug-spmd')
+                        var type = 'spmd'
+                        chrome.runtime.sendMessage(
+                            { contentScriptQuery: "addIndicatorName", fName, sName, tName, spma, spmb, spmc, spmd, type },
+                            resp => {
+                                if (resp.info.ok) {
+                                    $(this).siblings('.chrome-plug-spm-select-result').removeClass('color-error').addClass('color-green').text('指标录入成功！')
+                                } else {
+                                    $(this).siblings('.chrome-plug-spm-select-result').removeClass('color-green').addClass('color-error').text(resp.info.message)
+                                }
+                            })
+                    })
+
+                    $('body').on('click.plugin', '.chrome-plug-spm-select-clear', function (event) {
+                        var parent = $(this).parents('.chrome-plug-spm-advance')
+                        var spma = parent.attr('chrome-plug-spma')
+                        var spmb = parent.attr('chrome-plug-spmb')
+                        var spmc = parent.attr('chrome-plug-spmc')
+                        var spmd = parent.attr('chrome-plug-spmd')
+                        chrome.runtime.sendMessage(
+                            { contentScriptQuery: "deleteIndicatorName", spma, spmb, spmc, spmd },
+                            resp => {
+                                if (resp.info.ok) {
+                                    $(this).siblings('.chrome-plug-spm-select-result').removeClass('color-error').addClass('color-green').text('指标清除成功！')
+                                } else {
+                                    $(this).siblings('.chrome-plug-spm-select-result').removeClass('color-green').addClass('color-error').text(resp.info.message)
+                                }
+                            })
+                    })
+
                 });
             sendResponse('on')
         }

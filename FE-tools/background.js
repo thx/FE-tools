@@ -115,4 +115,87 @@ chrome.runtime.onMessage.addListener(
 				})
 			return true;
 		}
+
+		if (request.contentScriptQuery == "queryNameList") {
+			let url = "https://fether.m.alibaba-inc.com/analytics/api_indicator_query?_f_needLogin=1&token=xxx"
+			fetch(url, {
+				body: JSON.stringify({
+					fName: request.fName,
+					sName: request.sName
+				}),
+				method: 'POST',
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
+				credentials: 'include',
+			})
+				.then(response => response.json())
+				.then(resp => sendResponse(resp.result))
+				.catch(error => {
+					alert(error)
+				})
+			return true;
+		}
+
+		if (request.contentScriptQuery == "addIndicatorName") {
+			let url = "https://fether.m.alibaba-inc.com/analytics/api_indicator_config_add?_f_needLogin=1&token=xxx"
+			fetch(url, {
+				body: JSON.stringify(request),
+				method: 'POST',
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
+				credentials: 'include',
+			})
+				.then(response => response.json())
+				.then(resp => sendResponse(resp.result))
+				.catch(error => {
+					alert(error)
+				})
+			return true;
+		}
+
+		if (request.contentScriptQuery == "deleteIndicatorName") {
+			let url = "https://fether.m.alibaba-inc.com/analytics/api_indicator_config_delete?_f_needLogin=1&token=xxx"
+			fetch(url, {
+				body: JSON.stringify(request),
+				method: 'POST',
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
+				credentials: 'include',
+			})
+				.then(response => response.json())
+				.then(resp => sendResponse(resp.result))
+				.catch(error => {
+					alert(error)
+				})
+			return true;
+		}
+
+		if (request.contentScriptQuery == "queryNameConfig") {
+			let url = "https://fether.m.alibaba-inc.com/analytics/api_indicator_config_query?_f_needLogin=1&token=xxx"
+			fetch(url, {
+				body: JSON.stringify(request),
+				method: 'POST',
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
+				credentials: 'include',
+			})
+				.then(response => response.json())
+				.then(resp => sendResponse(resp.result))
+				.catch(error => {
+					alert(error)
+				})
+			return true;
+		}
 	});
