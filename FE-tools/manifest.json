@@ -1,9 +1,9 @@
 ﻿{
-    "manifest_version": 3,
+    "manifest_version": 2,
 
     "name": "mamadata",
     "description": "mamadata",
-    "version": "3.1.4",
+    "version": "3.1.5",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
