@@ -25,6 +25,9 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 
             // 获取站点整体数据
             var spma = $('meta[name="spm-id"]').attr('content') || $('meta[name="data-spm"]').attr('content')
+            if(spma.indexOf('.') > -1) {
+                spma = spma.split('.')[0]
+            }
             var spmObj = {} // 全店整体数据
             var dialogList = []
             chrome.runtime.sendMessage(
@@ -484,7 +487,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                             timer = setTimeout(function () {
                                 var attr = $(that).attr('data-spm-click')
                                 var reg = /locaid=([^;]+);?/
-                                // var spma = $('meta[name="spm-id"]').attr('content')
                                 var spmd = attr.match(reg)[1]
                                 var winWidth = $(window).width()
                                 var offset = $(event.currentTarget).offset()
@@ -617,7 +619,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span>曝光-Hover</span>
+                                                                <span>模块-Hover</span>
                                                             </td>
                                                             <td class="align-right">
                                                                 <span><%= spmcHover.pv%></span>
