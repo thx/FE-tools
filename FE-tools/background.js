@@ -116,6 +116,30 @@ chrome.runtime.onMessage.addListener(
 			return true;
 		}
 
+		if (request.contentScriptQuery == "addSpmcName") {
+			let url = "https://fether.m.alibaba-inc.com/analytics/api_add_spmcName?_f_needLogin=1&token=xxx"
+			fetch(url, {
+				body: JSON.stringify({
+					spma: request.spma,
+					spmc: request.spmc,
+					name: request.name
+				}),
+				method: 'POST',
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
+				credentials: 'include',
+			})
+				.then(response => response.json())
+				.then(resp => sendResponse(resp.result))
+				.catch(error => {
+					alert(error)
+				})
+			return true;
+		}
+
 		if (request.contentScriptQuery == "queryNameList") {
 			let url = "https://fether.m.alibaba-inc.com/analytics/api_indicator_query?_f_needLogin=1&token=xxx"
 			fetch(url, {

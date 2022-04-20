@@ -464,19 +464,37 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                     $('body').on('change', '.chrome-plug-spm-input-common', function (event) {
                         var newName = $(this).val()
                         var spmd = $(this).attr('chrome-plug-spmd')
+                        var spmc = $(this).attr('chrome-plug-spmc')
                         var me = this
-                        chrome.runtime.sendMessage(
-                            {
-                                contentScriptQuery: "addSpmdName",
-                                spma: spma,
-                                spmd: spmd,
-                                name: newName
-                            },
-                            resp => {
-                                if (resp.info.ok) {
-                                    $(me).hide().siblings('.chrome-plug-spm-update').show().find('.chrome-plug-spm-span-common').text(newName)
-                                }
-                            })
+                        if(spmd) {
+                            chrome.runtime.sendMessage(
+                                {
+                                    contentScriptQuery: "addSpmdName",
+                                    spma: spma,
+                                    spmd: spmd,
+                                    name: newName
+                                },
+                                resp => {
+                                    if (resp.info.ok) {
+                                        $(me).hide().siblings('.chrome-plug-spm-update').show().find('.chrome-plug-spm-span-common').text(newName)
+                                    }
+                                })
+                        }
+                        if(spmc) {
+                            chrome.runtime.sendMessage(
+                                {
+                                    contentScriptQuery: "addSpmcName",
+                                    spma: spma,
+                                    spmc: spmc,
+                                    name: newName
+                                },
+                                resp => {
+                                    if (resp.info.ok) {
+                                        $(me).hide().siblings('.chrome-plug-spm-update').show().find('.chrome-plug-spm-span-common').text(newName)
+                                    }
+                                })
+                        }
+                        
                     })
                     // 埋点hover事件
                     var timer
@@ -551,7 +569,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                                                             </td>
                                                             <td class="align-right">
                                                                 <a href="javascript:;" class="chrome-plug-spm-btn-addSpmd-click chrome-plug-spm-pointer chrome-plug-spm-handle" chrome-plug-spmd-name="<%= spmdObj.name%>" chrome-plug-spmd="<%= spmd%>" chrome-plug-spmb="<%= spmb%>">添加</a>
-                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-single?spma=<%= spma%>&spmd=<%= spmd%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
+                                                                <a href="https://mamadata.alibaba-inc.com/#!/spm/d-single?spma=<%= spma%>&searchKey=spmd&searchValue=<%= spmd%>" class="chrome-plug-spm-handle" target="_blank">查看详情</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
