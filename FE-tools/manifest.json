@@ -3,7 +3,7 @@
 
     "name": "mamadata",
     "description": "mamadata",
-    "version": "3.1.7",
+    "version": "3.1.8",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
@@ -12,7 +12,7 @@
         "default_icon": "icon_off.png"
     },
     "content_scripts": [{
-        "matches": ["https://*.taobao.com/*", "http://*.taobao.com/*", "http://*.alimama.com/*", "https://*.alimama.com/*", "https://*.lazada.com.ph/*", "https://*.alibaba-inc.com/*"],
+        "matches": ["https://*.taobao.com/*", "https://*.tmall.com/*", "http://*.taobao.com/*", "http://*.alimama.com/*", "https://*.alimama.com/*", "https://*.lazada.com.ph/*", "https://*.alibaba-inc.com/*"],
         "js": ["jquery-2.0.0.min.js", "underscore.min.js", "clipboard.min.js", "content.js", "select2.min.js"],
         "css": ["content.css", "select2.min.css"]
     }],
